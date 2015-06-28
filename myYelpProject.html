@@ -1,0 +1,26 @@
+<head>
+  <title>myYelpProject</title>
+</head>
+
+<body>
+  <h1>Welcome to Meteor!</h1>
+
+  {{> businesses}}
+</body>
+
+<template name="businesses">
+  <p id="demo"></p>
+  <button>Click Me</button>
+  {{#each counter.data.businesses}}
+    <li>
+      {{> business}}
+    </li>
+  {{/each}}
+</template>
+
+<template name="business">
+  {{name}}
+  <img src="{{image_url}}">
+  <a href="https://maps.google.com?q={{location.address}}">Address</a>
+</template>
+
