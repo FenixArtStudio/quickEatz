@@ -7,7 +7,6 @@ if (Meteor.isClient) {
       return Results.findOne();
     }
   });
-
   Template.businesses.events({
     'click button': function () {
       var x = document.getElementById("demo");
@@ -19,17 +18,12 @@ if (Meteor.isClient) {
             x.innerHTML = "Geolocation is not supported by this browser.";
         }
       }
-      function showPosition(position) {
-        // x.innerHTML = "Latitude: " + position.coords.latitude + 
-        // "<br>Longitude: " + position.coords.longitude;
+      function showPosition(position) {        
         var long, lat; 
         lat = position.coords.latitude;
         long = position.coords.longitude; 
         Meteor.call('getResults', long, lat );
       }
-      
-      
-      // Session.set('counter', Session.get('counter') + 1);
     }
   });
 }
@@ -38,7 +32,6 @@ if (Meteor.isServer) {
     
   Meteor.methods({
     'getResults': function (longitude, latitude) {
-      console.log(longitude, latitude);
       if (Results.findOne()) {
         Results.remove({});
       }
@@ -63,14 +56,13 @@ if (Meteor.isServer) {
         // location:'San+Francisco',
         term: 'food',
         ll: latitude + ',' + longitude,
+        radius_filter: 10,
+        // open_now: 8439,
         sort: 2,
         oauth_token: auth.accessToken
       };
-
       var oauthBinding = new OAuth1Binding(config, 'http://api.yelp.com/v2/search');
       oauthBinding.accessTokenSecret = auth.accessTokenSecret;
-      
-      
       Results.insert(oauthBinding.call('GET', oauthBinding._urls, parameters));
     }
   });

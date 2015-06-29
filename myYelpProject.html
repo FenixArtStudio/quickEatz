@@ -1,26 +1,38 @@
 <head>
-  <title>myYelpProject</title>
+  <title>Quick Eatz</title>
 </head>
 
 <body>
-  <h1>Welcome to Quick Eatz</h1>
+  <div class="container">
+    <h1>Welcome to Quick Eatz</h1>
 
-  {{> businesses}}
+    {{> businesses}}
+  </div>
 </body>
 
 <template name="businesses">
   <p id="demo"></p>
-  <button>Click Me</button>
+  <button>Click Me For New Results</button>
   {{#each counter.data.businesses}}
-    <li>
+    <div class="row text-center">
       {{> business}}
-    </li>
+    </div>
   {{/each}}
 </template>
 
 <template name="business">
-  {{name}}
-  <img src="{{image_url}}">
-  <a href="https://maps.google.com?q={{location.address}}">Address</a>
+  <h2>{{name}}</h2> 
+  <div class="col-xs-4">
+    <img src="{{image_url}}">  
+  </div>
+  <div class="col-xs-8">
+    <ul>
+      <li><img src="{{rating_img_url}}">&nbsp;{{review_count}} Reviews</li>
+      <li>{{location.neighborhoods}}</li>
+      <li><a href="https://maps.google.com?saddr=Current+Location&daddr={{location.address}}" target="_blank">{{location.address}}</a></li>
+      <li>{{display_phone}}</li>
+    </ul>
+  </div>
+  {{categories}}
 </template>
 
