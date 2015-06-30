@@ -1,0 +1,15 @@
+<template name="businessesList">
+  <p id="demo"></p>
+  <button>Click Me For New Results</button>
+  <form>
+    <input name="search" type="text" id="filter"/>
+    <p id="results-count"></p>
+  </form> 
+
+  {{#each counter.data.businesses}}
+    
+    <div class="row text-center results-list">
+      {{> business}}
+    </div>
+  {{/each}}
+</template>
