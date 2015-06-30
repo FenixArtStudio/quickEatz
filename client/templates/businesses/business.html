@@ -1,25 +1,3 @@
-<head>
-  <title>Quick Eatz</title>
-</head>
-
-<body>
-  <div class="container">
-    <h1>Welcome to Quick Eatz</h1>
-
-    {{> businesses}}
-  </div>
-</body>
-
-<template name="businesses">
-  <p id="demo"></p>
-  <button>Click Me For New Results</button>
-  {{#each counter.data.businesses}}
-    <div class="row text-center">
-      {{> business}}
-    </div>
-  {{/each}}
-</template>
-
 <template name="business">
   <h2>{{name}}</h2> 
   <div class="col-xs-4">
@@ -34,5 +12,5 @@
     </ul>
   </div>
   {{categories}}
-</template>
 
+</template>
