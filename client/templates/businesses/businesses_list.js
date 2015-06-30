@@ -1,7 +1,7 @@
 Template.businessesList.helpers({
-  counter: function () {
+  results: function () {
     
-    return Results.findOne();
+    return Results.find();
   }
 });
 Template.businessesList.events({
@@ -19,7 +19,8 @@ Template.businessesList.events({
       var long, lat; 
       lat = position.coords.latitude;
       long = position.coords.longitude; 
-      Meteor.call('getResults', long, lat );
+      Meteor.subscribe('results', long, lat);
+      // Meteor.call('getResults', long, lat );
     }
   },
   'keyup #filter': function (e, tpl) {
