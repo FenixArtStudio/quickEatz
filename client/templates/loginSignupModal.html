@@ -2,21 +2,21 @@
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-body2" style="display: none">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Create Account</h4>
-          </div>
-            {{> createUser}}
-            <a href="#" class="create-account-link">Sign In</a>
+        <div class="modal-header" style="display: none">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel"><strong>Create Account</strong></h4>
+        </div>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel"><strong>Login</strong></h4>
+        </div>
+        <div class="modal-body" style="display: none">
+          {{> createUser}}
+          Already have an account? <a href="#" class="create-account-link">Sign In</a>
         </div>
         <div class="modal-body">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Login</h4>
-          </div>
           {{> login}}
-          <a href="#" class="create-account-link">Create Account</a>
+          Don't have an account? <a href="#" class="create-account-link">Create Account</a>
         </div>
       </div>
     </div>
