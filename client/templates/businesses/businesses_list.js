@@ -1,7 +1,6 @@
 Template.businessesList.helpers({
   results: function () {
-    
-    return Results.find();
+    return Results.find().fetch();
   }
 });
 Template.businessesList.events({
@@ -20,11 +19,10 @@ Template.businessesList.events({
       lat = position.coords.latitude;
       long = position.coords.longitude; 
       Meteor.subscribe('results', long, lat);
-      // Meteor.call('getResults', long, lat );
     }
   },
-  'keyup #filter': function (e, tpl) {
-    e.preventDefault();
+  'keyup #filter': function (event, tpl) {
+    event.preventDefault();
     var filter = tpl.$('[name=search]').val(), count = 0;
     var resultsCount = document.getElementById('results-count');
     var regex = new RegExp(filter, 'i');

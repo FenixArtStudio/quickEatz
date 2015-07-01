@@ -1,7 +1,3 @@
-// Meteor.publish('results', function () {
-//   return Results.find();
-// });
-
 Meteor.publish('results', function (lat, long) {
   var self = this;
 
@@ -37,15 +33,12 @@ Meteor.publish('results', function (lat, long) {
   };
   var oauthBinding = new OAuth1Binding(config, 'http://api.yelp.com/v2/search');
   oauthBinding.accessTokenSecret = auth.accessTokenSecret;
-  // Results.insert(oauthBinding.call('GET', oauthBinding._urls, parameters));
+  
   var results = oauthBinding.call('GET', oauthBinding._urls, parameters);
-  // console.log();
-
   _.each(results.data.businesses, function (result) {
     self.added('results', result.id, result);
   });
 
   self.ready();
-
 
 });

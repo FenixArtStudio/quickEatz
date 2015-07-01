@@ -2,3 +2,58 @@ ul{
   list-style-type: none;
   word-wrap:break-word;
 }
+
+.landing-div{
+  background: url(assets/images/landing-image.jpg) no-repeat scroll top center;;
+  height: 450px;
+  /*background-repeat: no-repeat;*/
+  background-size:cover;
+  /*width: 100%;*/
+}
+
+.landing-div form{
+  margin-top: 50px;
+  width: 250px;
+  font-family: 'Josefin Slab', serif;
+
+}
+/*@media (min-width: 768px) {
+    .text-justify-sm {
+        text-align: center;
+    }
+}*/
+nav{
+  height: 90px;
+  position: relative;
+  margin-bottom: 0px !important;
+  font-family: 'Josefin Slab', serif !important;
+}
+
+.navbar {
+  background-color: white !important;
+}
+
+nav .navbar-nav{
+ margin-bottom: 10px !important;
+}
+nav a{
+  padding-top: 30px !important;
+  font-size: 40px !important;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 100px;
+  background-color: black;
+}

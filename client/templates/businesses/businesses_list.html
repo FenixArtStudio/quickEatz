@@ -2,12 +2,13 @@
   <p id="demo"></p>
   <button>Click Me For New Results</button>
   <form>
-    <input name="search" type="text" id="filter"/>
-    <p id="results-count"></p>
+    {{#if results}}
+      <input name="search" type="text" placeholder="Search Results" id="filter"/>
+      <p id="results-count"></p>
+    {{/if}}
   </form> 
 
   {{#each results}}
-    
     <div class="row text-center results-list">
       {{> business}}
     </div>
