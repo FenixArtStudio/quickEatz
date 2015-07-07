@@ -11,21 +11,25 @@
     <button data-action="getResults" type="submit" class="button button-full button-positive">
       Get Restaurants
     </button>
-    <form>
+    {{#if loading}}
+    {{else}}
       {{#if results}}
-        <div class="list list-inset">
-          <label class="item item-input">
-            <i class="icon ion-search placeholder-icon"></i>
-            <input type="text" name="search" placeholder="Search" id="filter">
-          </label>
-        </div>
-        <div class="padding" id="results-count"></div>
+         <form>
+          <div class="list list-inset">
+            <label class="item item-input">
+              <i class="icon ion-search placeholder-icon"></i>
+              <input type="text" name="search" placeholder="Search" id="filter">
+            </label>
+          </div>
+          <div class="padding" id="results-count"></div>
+        </form> 
+
+        {{#each results}}
+          <div class="results-list">
+            {{> business}}
+          </div>
+        {{/each}}
       {{/if}}
-    </form> 
-    {{#each results}}
-      <div class="results-list">
-        {{> business}}
-      </div>
-    {{/each}}
+    {{/if}}
   {{/ionContent}}
 </template>
