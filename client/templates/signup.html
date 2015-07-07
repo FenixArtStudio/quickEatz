@@ -5,28 +5,29 @@
   {{#contentFor "headerTitle"}}
     <h1 class="title">Sign Up</h1>
   {{/contentFor}}
-
-  {{#ionContent}}
-    <form>
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" name="username">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Email</span>
-          <input name="email" type="text" >
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" name="password">
-        </label>
-      </div>
-      <div class="padding">
-        <button type="submit" class="button button-block button-positive">
-          Sign In
-        </button>
-      </div>
-    </form>
-  {{/ionContent}}
+  {{#ionView}}
+    {{#ionContent}}
+      <form>
+        <div class="list">
+          <label class="item item-input">
+            <span class="input-label">Username</span>
+            <input type="text" name="username">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Email</span>
+            <input name="email" type="text" >
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Password</span>
+            <input type="password" name="password">
+          </label>
+        </div>
+        <div class="padding">
+          <button type="submit" class="button button-block button-positive">
+            Sign In
+          </button>
+        </div>
+      </form>
+    {{/ionContent}}
+  {{/ionView}}
 </template>

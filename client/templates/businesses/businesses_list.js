@@ -1,22 +1,30 @@
+Template.businessesList.onCreated(function () {
+  this.loading = new ReactiveVar;
+});
+
 Template.businessesList.helpers({
   results: function () {
-    IonLoading.hide({
-      delay: 0
-    });
-    return Results.find().fetch();
+    return Results.find();
   },
   'loading': function () {
     return Session.get('loading')
   }
 });
 
+Template.businessesList.rendered = function () {
+  var self = this;
+  self.autorun(function () {
+    if (self.loading.get()) {
+      IonLoading.show();
+    } else {
+      IonLoading.hide();
+    }
+  })
+};
 
 Template.businessesList.events({
-  'click [data-action=getResults]': function () {
-    IonLoading.show({
-      delay: 0
-    });
-    Session.set('loading', true);
+  'click [data-action=getResults]': function (event, template) {
+    template.loading.set(true);
     event.preventDefault();
     getLocation();
     function getLocation() {
@@ -34,10 +42,9 @@ Template.businessesList.events({
       var long, lat; 
       lat = position.coords.latitude;
       long = position.coords.longitude; 
-      resultsSub = Meteor.subscribe('results', lat, long);
-      if (resultsSub) {
-        Session.set('loading', false);
-      }
+      Meteor.subscribe('results', lat, long, function () {
+        template.loading.set(false);
+      });
     }
   },
   'keyup #filter': function (event, tpl) {

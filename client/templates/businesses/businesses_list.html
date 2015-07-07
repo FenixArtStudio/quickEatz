@@ -11,10 +11,9 @@
     <button data-action="getResults" type="submit" class="button button-full button-positive">
       Get Restaurants
     </button>
-    {{#if loading}}
-    {{else}}
-      {{#if results}}
-         <form>
+    {{#unless loading}}
+      {{#if results.count}}
+        <form>
           <div class="list list-inset">
             <label class="item item-input">
               <i class="icon ion-search placeholder-icon"></i>
@@ -30,6 +29,7 @@
           </div>
         {{/each}}
       {{/if}}
-    {{/if}}
+     
+    {{/unless}}
   {{/ionContent}}
 </template>

@@ -5,15 +5,17 @@
   {{/contentFor}}
 
   {{#unless currentUser}}
-    {{#ionContent}}
-      {{#ionList}}
-        {{#ionItem path="login"}}
-          Login
-        {{/ionItem}}
-        {{#ionItem path="signup"}}
-          Sign Up
-        {{/ionItem}}
-      {{/ionList}}
-    {{/ionContent}}
+    {{#ionView}}
+      {{#ionContent}}
+        {{#ionList}}
+          {{#ionItem path="login"}}
+            Login
+          {{/ionItem}}
+          {{#ionItem path="signup"}}
+            Sign Up
+          {{/ionItem}}
+        {{/ionList}}
+      {{/ionContent}}
+    {{/ionView}}
   {{/unless}}
 </template>

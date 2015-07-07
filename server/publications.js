@@ -1,19 +1,22 @@
+Meteor.startup(function () {
+  if(!Accounts.loginServiceConfiguration.findOne({service: 'yelp'})) {
+    Accounts.loginServiceConfiguration.insert({
+      service: "yelp",
+      consumerKey: YELP.CONSUMERKEY,
+      consumerSecret: YELP.CONSUMERSECRET,
+      accessToken: YELP.ACCESSTOKEN,
+      accessTokenSecret: YELP.ACCESSTOKENSECRET,
+      signatureMethod: "HMAC-SHA1"
+    });
+  }
+});
+
 Meteor.publish('results', function (latitude, longitude) {
   var self = this;
 
   if (Results.findOne()) {
     Results.remove({});
   }
-
-  Accounts.loginServiceConfiguration.remove({service: "yelp"});
-  Accounts.loginServiceConfiguration.insert({
-    service: "yelp",
-    consumerKey: YELP.CONSUMERKEY,
-    consumerSecret: YELP.CONSUMERSECRET,
-    accessToken: YELP.ACCESSTOKEN,
-    accessTokenSecret: YELP.ACCESSTOKENSECRET,
-    signatureMethod: "HMAC-SHA1"
-  });
 
   var auth = Accounts.loginServiceConfiguration.findOne({service: 'yelp'});
 
