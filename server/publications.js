@@ -1,4 +1,4 @@
-Meteor.publish('results', function (lat, long) {
+Meteor.publish('results', function (latitude, longitude) {
   var self = this;
 
   if (Results.findOne()) {
@@ -23,11 +23,9 @@ Meteor.publish('results', function (lat, long) {
   };
 
   var parameters = {
-    location:'San+Francisco',
     term: 'food',
-    // ll: latitude + ',' + longitude,
-    radius_filter: 10,
-    // open_now: 8439,
+    ll: latitude + ',' + longitude,
+    // open_now: 8439, 
     sort: 2,
     oauth_token: auth.accessToken
   };

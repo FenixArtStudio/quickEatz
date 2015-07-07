@@ -1,6 +1,18 @@
 <template name="business">
-  <h2>{{name}}</h2> 
-  <div class="col-xs-4">
+<!--   {{#ionContent class="padding"}}
+    <a href="{{pathFor 'businessPage'}}"><h2>{{name}}</h2></a>  
+  {{/ionContent}} 
+     -->
+    
+  <a class="item item-thumbnail-left" href="#">
+    <img src="{{image_url}}">
+    <a href="{{pathFor 'businessPage'}}"><h2>{{name}}</h2></a>  
+
+    <p>{{display_phone}}</p>
+    <a href="https://maps.google.com?saddr=Current+Location&daddr={{location.display_address}}" target="_blank">{{location.address}}</a>
+  </a>
+  
+<!--   <div class="col-xs-4">
     <img src="{{image_url}}">  
   </div>
   <div class="col-xs-8">
@@ -10,7 +22,7 @@
       <li><a href="https://maps.google.com?saddr=Current+Location&daddr={{location.address}}" target="_blank">{{location.address}}</a></li>
       <li>{{display_phone}}</li>
     </ul>
-  </div>
-  {{categories}}
+  </div> -->
+  <!-- {{categories}} -->
 
 </template>

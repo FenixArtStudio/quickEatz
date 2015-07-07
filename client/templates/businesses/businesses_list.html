@@ -1,16 +1,31 @@
 <template name="businessesList">
-  <p id="demo"></p>
-  <button>Click Me For New Results</button>
-  <form>
-    {{#if results}}
-      <input name="search" type="text" placeholder="Search Results" id="filter"/>
-      <p id="results-count"></p>
-    {{/if}}
-  </form> 
 
-  {{#each results}}
-    <div class="row text-center results-list">
-      {{> business}}
-    </div>
-  {{/each}}
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Restaurants</h1>
+  {{/contentFor}}
+
+  {{#ionContent}}
+    {{#if currentUser}}
+      <button class="button button-full button-positive" data-action="logout">Logout</button>
+    {{/if}}
+    <button data-action="getResults" type="submit" class="button button-full button-positive">
+      Get Restaurants
+    </button>
+    <form>
+      {{#if results}}
+        <div class="list list-inset">
+          <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" name="search" placeholder="Search" id="filter">
+          </label>
+        </div>
+        <div class="padding" id="results-count"></div>
+      {{/if}}
+    </form> 
+    {{#each results}}
+      <div class="results-list">
+        {{> business}}
+      </div>
+    {{/each}}
+  {{/ionContent}}
 </template>

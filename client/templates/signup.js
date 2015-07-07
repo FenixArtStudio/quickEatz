@@ -1,5 +1,5 @@
-Template.createUser.events({
-  'submit #create-user': function (event, template) {
+Template.signup.events({
+  'submit': function (event, template) {
     event.preventDefault();
     var username = template.$('[name=username]').val();
     var email = template.$('[name=email]').val();
@@ -12,12 +12,12 @@ Template.createUser.events({
     };
     
     Accounts.createUser(user, function (error) {
-      console.log(error);
-    });
+      if (error) {
+        console.log(error)
+      }  else {
+        Router.go('/restaurants')
 
-    $(function () {
-      // $('#myModal').modal('toggle');
-      $('#create-user')[0].reset();
+      }
     });
   }
 })

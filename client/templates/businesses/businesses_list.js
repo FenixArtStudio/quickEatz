@@ -3,22 +3,27 @@ Template.businessesList.helpers({
     return Results.find().fetch();
   }
 });
+
 Template.businessesList.events({
-  'click button': function () {
-    var x = document.getElementById("demo");
+  'click [data-action=getResults]': function () {
+    event.preventDefault();
     getLocation();
     function getLocation() {
       if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(showPosition);
       } else {
-          x.innerHTML = "Geolocation is not supported by this browser.";
+        IonPopup.alert({
+          title: 'Alert',
+          template: 'Geolocation is not supported by this browser.',
+          okText: 'Ok.'
+        });
       }
     }
     function showPosition(position) {        
       var long, lat; 
       lat = position.coords.latitude;
       long = position.coords.longitude; 
-      Meteor.subscribe('results', long, lat);
+      Meteor.subscribe('results', lat, long);
     }
   },
   'keyup #filter': function (event, tpl) {
@@ -34,6 +39,12 @@ Template.businessesList.events({
         count++
         $('#results-count').text('Results ' + count);
       }
+    });
+  },
+  'click [data-action=logout]': function (event) {
+    event.preventDefault();
+    Meteor.logout(function () {
+      Router.go('index')
     });
   }
 });

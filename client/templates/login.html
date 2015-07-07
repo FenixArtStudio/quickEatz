@@ -1,14 +1,27 @@
 <template name="login">
-  <form id="login" role="form">
-    <div class="form-group">
-      <label for="login-email">Email</label>
-      <input class="form-control" name="email" type="text">
-    </div>
-    <div class="form-group">
-      <label for="login-password">Password</label>
-      <input class="form-control" name="password" type="password">
+  {{#contentFor "headerButtonLeft"}}
+    {{>ionNavBackButton path="index"}}
+  {{/contentFor}}
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Login</h1>
+  {{/contentFor}}
+  {{#ionContent}}
+    <form>
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input name="email" type="text">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input name="password" type="password">
+        </label>
       </div>
-    <input type="submit" value="Login">
-    <p id="form-messages"></p>
-  </form>
+      <div class="padding">
+        <button type="submit" class="button button-block button-positive">
+          Sign In
+        </button>
+      </div>
+    </form>
+  {{/ionContent}}
 </template>

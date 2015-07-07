@@ -1,0 +1,11 @@
+<template name="businessPage">
+  {{#contentFor "headerButtonLeft"}}
+    {{>ionNavBackButton path="restaurants"}}
+  {{/contentFor}}
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">{{name}}</h1>
+  {{/contentFor}}
+  {{#ionContent}}
+    {{> business}}
+  {{/ionContent}} 
+</template>
