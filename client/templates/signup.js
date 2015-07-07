@@ -16,7 +16,6 @@ Template.signup.events({
         console.log(error)
       }  else {
         Router.go('/restaurants')
-
       }
     });
   }
