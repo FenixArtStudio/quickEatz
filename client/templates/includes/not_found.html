@@ -1,0 +1,15 @@
+<template name="notFound">
+{{#contentFor "headerButtonLeft"}}
+    {{>ionNavBackButton path="restaurants"}}
+  {{/contentFor}}
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Quik Eatz</h1>
+  {{/contentFor}}
+  
+  {{#ionView}}
+    {{#ionContent}}
+      <h2>404</h2>
+      <p>Sorry, we couldn't find a page at this address</p>
+    {{/ionContent}}
+  {{/ionView}}
+</template>

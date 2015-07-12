@@ -1,16 +1,44 @@
 <template name="businessesList">
-  <p id="demo"></p>
-  <button>Click Me For New Results</button>
-  <form>
-    {{#if results}}
-      <input name="search" type="text" placeholder="Search Results" id="filter"/>
-      <p id="results-count"></p>
-    {{/if}}
-  </form> 
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Quik Eatz</h1>
+  {{/contentFor}}
+  {{#contentFor "headerButtonLeft"}}
+    <button class="button button-clear pull-left" data-ion-menu-toggle="left">
+      {{#if isAndroid}}
+        {{> ionIcon icon='android-more-vertical'}}
+      {{else}}
+        {{> ionIcon icon='navicon'}}
+      {{/if}}
+    </button>
+  {{/contentFor}}
+  {{#ionView}}
+    {{#ionContent}}
+      {{#if currentUser}}
+        <button class="button button-full button-positive" data-action="logout">Logout</button>
+      {{/if}}
+      <button data-action="getResults" type="submit" class="button button-full button-positive">
+        Get Restaurants
+      </button>
+      {{#unless loading}}
+        {{#if results.count}}
+          <form>
+            <div class="list list-inset">
+              <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" name="search" placeholder="Search" id="filter">
+              </label>
+            </div>
+            <div class="padding" id="results-count"></div>
+          </form> 
 
-  {{#each results}}
-    <div class="row text-center results-list">
-      {{> business}}
-    </div>
-  {{/each}}
+          {{#each results}}
+            <div class="results-list">
+              {{> business}}
+            </div>
+          {{/each}}
+        {{/if}}
+       
+      {{/unless}}
+    {{/ionContent}}
+  {{/ionView}}
 </template>

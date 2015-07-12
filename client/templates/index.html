@@ -1,0 +1,20 @@
+<template name="index">
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Welcome to Quik Eatz</h1>
+  {{/contentFor}}
+
+  {{#unless currentUser}}
+    {{#ionView}}
+      {{#ionContent}}
+        {{#ionList}}
+          {{#ionItem path="login"}}
+            Login
+          {{/ionItem}}
+          {{#ionItem path="signup"}}
+            Sign Up
+          {{/ionItem}}
+        {{/ionList}}
+      {{/ionContent}}
+    {{/ionView}}
+  {{/unless}}
+</template>
