@@ -1,28 +1,9 @@
 <template name="business">
-<!--   {{#ionContent class="padding"}}
-    <a href="{{pathFor 'businessPage'}}"><h2>{{name}}</h2></a>  
-  {{/ionContent}} 
-     -->
-    
-  <a class="item item-thumbnail-left" href="#">
+  <a class="item item-thumbnail-left" href="{{pathFor 'businessPage'}}">
     <img src="{{image_url}}">
-    <a href="{{pathFor 'businessPage'}}"><h2>{{name}}</h2></a>  
-
-    <p>{{display_phone}}</p>
-    <a href="https://maps.google.com?saddr=Current+Location&daddr={{location.display_address}}" target="_blank">{{location.address}}</a>
+    <h2>{{name}}</h2>
+    <p>{{location.neighborhoods}}</p>
+    <p>{{distance_in_miles}} Miles Away</p>
+    <p>{{rating}} Star Rating | {{review_count}} Reviews</p>
   </a>
-  
-<!--   <div class="col-xs-4">
-    <img src="{{image_url}}">  
-  </div>
-  <div class="col-xs-8">
-    <ul>
-      <li><img src="{{rating_img_url}}">&nbsp;{{review_count}} Reviews</li>
-      <li>{{location.neighborhoods}}</li>
-      <li><a href="https://maps.google.com?saddr=Current+Location&daddr={{location.address}}" target="_blank">{{location.address}}</a></li>
-      <li>{{display_phone}}</li>
-    </ul>
-  </div> -->
-  <!-- {{categories}} -->
-
 </template>

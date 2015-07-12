@@ -2,13 +2,21 @@ var OnBeforeActions;
 
 Router.configure({
   layoutTemplate: 'layout',
-  loadingTemplate: 'loading'
+  loadingTemplate: 'loading',
+  notFoundTemplate: 'notFound'
 });
 
 OnBeforeActions = {
   loginRequired: function () {
-    if (!Meteor.userId()) {
-      this.render('login')
+    if (!(Meteor.userId() || Meteor.loggingIn())) {
+      this.render('login');
+    } else {
+      this.next();
+    }
+  },
+  authenticated: function () {
+    if(Meteor.userId()) {
+      Router.go('restaurants');
     } else {
       this.next();
     }
@@ -17,7 +25,14 @@ OnBeforeActions = {
 
 Router.onBeforeAction(OnBeforeActions.loginRequired, {
   only: ['restaurants', 'businessPage']
-})
+});
+
+Router.onBeforeAction(OnBeforeActions.authenticated, {
+  only: ['index', 'login', 'signup']
+});
+
+Router.onBeforeAction('dataNotFound', {only: 'businessPage'});
+
 Router.route('index', {
   path: '/'
 });
@@ -28,7 +43,7 @@ Router.route('login', function () {
 });
 
 Router.route('signup', function () {
-  path: 'signup',
+  path: '/signup',
   this.render('signup')
 });
 
@@ -39,7 +54,8 @@ Router.route('restaurants', function () {
 
 Router.route('businessPage', {
   path: '/restaurants/:_id',
-  data: function () {
-    return Results.findOne(this.params._id);
-  }
+  waitOn: function () {
+    return Meteor.subscribe('business', this.params._id);
+  },
+  data: function () {return Business.findOne(this.params._id);} 
 });

@@ -4,10 +4,7 @@ Template.businessesList.onCreated(function () {
 
 Template.businessesList.helpers({
   results: function () {
-    return Results.find();
-  },
-  'loading': function () {
-    return Session.get('loading')
+    return Search.find();
   }
 });
 
@@ -42,7 +39,7 @@ Template.businessesList.events({
       var long, lat; 
       lat = position.coords.latitude;
       long = position.coords.longitude; 
-      Meteor.subscribe('results', lat, long, function () {
+      Meteor.subscribe('search', lat, long, function () {
         template.loading.set(false);
       });
     }

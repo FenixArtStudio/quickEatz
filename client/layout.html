@@ -1,38 +1,32 @@
 <template name="layout">
   {{#ionBody}}
-
-    <!-- {{#ionSideMenuContainer}}
+    {{#ionSideMenuContainer side="left"}}
 
       {{#ionSideMenus}}
 
-        {{#ionSideMenu side="left"}}
+        {{#ionSideMenu}}
           <div class="bar bar-header bar-dark">
-            <h1 class="title">Menu</h1>
+            <h1 class="title">Left Menu</h1>
           </div>
           <div class="content has-header">
             <div class="list">
               <div class="item item-icon-right" data-ion-menu-close>
-                <a href="#">
-                  Log Out {{> ionIcon icon="ios-arrow-right"}}
-                </a>
+                Sign Out {{> ionIcon  icon="ios-arrow-right"}}
               </div>
             </div>
           </div>
         {{/ionSideMenu}}
 
-      {{/ionSideMenus}} -->
+      {{/ionSideMenus}}
 
-      <!-- {{#ionSideMenuContent}} -->
+      {{#ionSideMenuContent}}
+    {{> ionNavBar class="bar-positive"}}
+    
+    {{#ionNavView}}
+      {{> yield}}
+    {{/ionNavView}}
+      {{/ionSideMenuContent}}
 
-        {{> ionNavBar class="bar-positive"}}
-
-        {{#ionNavView}}
-          {{> yield}}
-        {{/ionNavView}}
-
-     <!--  {{/ionSideMenuContent}}
-
-    {{/ionSideMenuContainer}} -->
-
+    {{/ionSideMenuContainer}}
   {{/ionBody}}
 </template>
