@@ -3,9 +3,45 @@
     {{>ionNavBackButton path="restaurants"}}
   {{/contentFor}}
   {{#contentFor "headerTitle"}}
-    <h1 class="title">{{name}}</h1>
+    <h1 class="title">Quik Eatz</h1>
   {{/contentFor}}
-  {{#ionContent}}
-    {{> business}}
-  {{/ionContent}} 
+  {{#ionView}}
+    {{#ionContent}}
+      <div style="height: 100%">
+        <div class="list card">
+          <div class="item">
+            <h2>{{name}}</h2>
+            <p>{{location.neighborhoods}}</p>
+            <a href="#" data-action="directions">{{location.display_address}}</a>
+          </div>
+
+          <div class="item item-body">
+            <img class="full-image" src="{{original_image_url}}">
+             
+              <p class="subdued">{{rating}} Star Rating</p>
+              <p class="subdued">{{review_count}} Reviews</p>
+            
+            <p>
+              {{snippet_text}}
+            </p>
+          </div>
+
+          <div class="item tabs tabs-secondary tabs-icon-left">
+            <a class="tab-item" href="tel:7758351651">
+              <i class="icon ion-ios-telephone"></i>
+              Call
+            </a>
+            <a class="tab-item" href="#">
+              <i class="icon ion-android-favorite"></i>
+              Favorite
+            </a>
+            <a class="tab-item" href="#" data-action="share">
+              <i class="icon ion-share"></i>
+              Share
+            </a>
+          </div>
+        </div>
+      </div>
+    {{/ionContent}} 
+  {{/ionView}}
 </template>

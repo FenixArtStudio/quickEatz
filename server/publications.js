@@ -11,13 +11,9 @@ Meteor.startup(function () {
   }
 });
 
-Meteor.publish('results', function (latitude, longitude) {
+Meteor.publish('search', function (latitude, longitude) {
   var self = this;
-
-  if (Results.findOne()) {
-    Results.remove({});
-  }
-
+  
   var auth = Accounts.loginServiceConfiguration.findOne({service: 'yelp'});
 
   var config = {
@@ -28,18 +24,44 @@ Meteor.publish('results', function (latitude, longitude) {
   var parameters = {
     term: 'food',
     ll: latitude + ',' + longitude,
-    // open_now: 8439, 
     sort: 2,
     oauth_token: auth.accessToken
   };
+
   var oauthBinding = new OAuth1Binding(config, 'http://api.yelp.com/v2/search');
   oauthBinding.accessTokenSecret = auth.accessTokenSecret;
   
-  var results = oauthBinding.call('GET', oauthBinding._urls, parameters);
-  _.each(results.data.businesses, function (result) {
-    self.added('results', result.id, result);
+  var searchResults = oauthBinding.call('GET', oauthBinding._urls, parameters);
+  console.log(searchResults);
+  _.each(searchResults.data.businesses, function (searchResult) {
+    searchResult.distance_in_miles = (searchResult.distance * 0.000621371).toFixed(2);
+    self.added('search', searchResult.id, searchResult);
   });
 
   self.ready();
 
+});
+
+Meteor.publish('business', function (id) {
+  var self = this;
+  
+  var auth = Accounts.loginServiceConfiguration.findOne({service: 'yelp'});
+
+  var config = {
+    consumerKey: auth.consumerKey,
+    secret: auth.consumerSecret,
+  };
+
+  var parameters = {
+    oauth_token: auth.accessToken
+  };
+
+  var oauthBinding = new OAuth1Binding(config, 'http://api.yelp.com/v2/business/' + id);
+  oauthBinding.accessTokenSecret = auth.accessTokenSecret;
+
+  var businessResult = oauthBinding.call('GET', oauthBinding._urls, parameters);
+  businessResult.data.original_image_url = businessResult.data.image_url.replace('ms.jpg', 'o.jpg');
+  
+  self.added('business', businessResult.data.id, businessResult.data);
+  self.ready();
 });
