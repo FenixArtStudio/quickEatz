@@ -1,4 +1,24 @@
+Template.businessPage.onRendered(function () {
+  var favoriteExists = Favorite.findOne({userId: Meteor.user()._id, businessId: this.data._id});
+  if (favoriteExists) {
+    $('.favorite-button').addClass('favorite-active');
+  }
+});
+
 Template.businessPage.events({
+  'click [data-action=favorite]': function (event, template) {
+    Meteor.call('addFavorite', this, function (error, result) {
+      if (error) {
+        console.log(error);
+      }
+      if (result.favoriteExists) {
+        $('.favorite-button').removeClass('favorite-active');  
+      } else {
+        $('.favorite-button').addClass('favorite-active');  
+      }
+      
+    });
+  },  
   'click [data-action=directions]': function (event, template) {
     var self = this;
     IonActionSheet.show({
@@ -8,9 +28,6 @@ Template.businessPage.events({
         { text: 'Apple Maps' }
       ],
       cancelText: 'Cancel',
-      cancel: function() {
-        console.log('Cancelled!');
-      },
       buttonClicked: function(index) {
         if (index === 0) {
           window.open(
@@ -38,9 +55,6 @@ Template.businessPage.events({
         { text: 'Facebook <i class="icon ion-social-facebook"></i>' }
       ],
       cancelText: 'Cancel',
-      cancel: function() {
-        console.log('Cancelled!');
-      },
       buttonClicked: function(index) {
         if (index === 0) {
           window.location.href = self.phone;

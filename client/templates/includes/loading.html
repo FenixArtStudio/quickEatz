@@ -1,7 +1,12 @@
 <template name="loading">
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Quik Eatz</h1>
+  {{/contentFor}}
   {{#ionView}}
     {{#ionContent}}
-      <h2>Loading...</h2>
+      <div class="padding">
+        <h2>Loading...</h2>
+      </div>
     {{/ionContent}}
   {{/ionView}}
 </template>

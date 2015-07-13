@@ -2,6 +2,13 @@ Template.businessesList.onCreated(function () {
   this.loading = new ReactiveVar;
 });
 
+Template.businessPage.onRendered(function () {
+  var favoriteExists = Favorite.findOne({userId: Meteor.user()._id, businessId: this.data._id});
+  if (favoriteExists) {
+    $('.favorite-button').addClass('favorite-active');  
+  }
+});
+
 Template.businessesList.helpers({
   results: function () {
     return Search.find();

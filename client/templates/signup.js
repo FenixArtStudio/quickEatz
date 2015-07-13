@@ -13,7 +13,11 @@ Template.signup.events({
     
     Accounts.createUser(user, function (error) {
       if (error) {
-        console.log(error)
+        IonPopup.alert({
+          title: 'There was an error creating your account:',
+          template: error.reason,
+          okText: 'Ok.'
+        });
       }  else {
         Router.go('/restaurants')
       }

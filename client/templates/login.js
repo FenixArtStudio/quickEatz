@@ -8,7 +8,11 @@ Template.login.events({
       if (Meteor.user()) {
         Router.go('/restaurants')
       } else {
-        var message = 'There was an error loggin in:' + error.reason;
+        IonPopup.alert({
+          title: 'There was an error loging in:',
+          template: error.reason,
+          okText: 'Ok.'
+        });
       }
       return;
     })

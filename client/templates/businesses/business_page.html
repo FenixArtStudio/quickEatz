@@ -14,24 +14,20 @@
             <p>{{location.neighborhoods}}</p>
             <a href="#" data-action="directions">{{location.display_address}}</a>
           </div>
-
           <div class="item item-body">
             <img class="full-image" src="{{original_image_url}}">
-             
-              <p class="subdued">{{rating}} Star Rating</p>
-              <p class="subdued">{{review_count}} Reviews</p>
-            
+            <p class="subdued">{{rating}} Star Rating</p>
+            <p class="subdued">{{review_count}} Reviews</p>
             <p>
               {{snippet_text}}
             </p>
           </div>
-
           <div class="item tabs tabs-secondary tabs-icon-left">
             <a class="tab-item" href="tel:7758351651">
               <i class="icon ion-ios-telephone"></i>
               Call
             </a>
-            <a class="tab-item" href="#">
+            <a class="tab-item favorite-button" href="#" data-action="favorite">
               <i class="icon ion-android-favorite"></i>
               Favorite
             </a>
@@ -44,4 +40,5 @@
       </div>
     {{/ionContent}} 
   {{/ionView}}
+  {{> footer}}
 </template>
