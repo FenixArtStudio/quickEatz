@@ -32,7 +32,6 @@ Meteor.publish('search', function (latitude, longitude) {
   oauthBinding.accessTokenSecret = auth.accessTokenSecret;
   
   var searchResults = oauthBinding.call('GET', oauthBinding._urls, parameters);
-  console.log(searchResults);
   _.each(searchResults.data.businesses, function (searchResult) {
     searchResult.distance_in_miles = (searchResult.distance * 0.000621371).toFixed(2);
     self.added('search', searchResult.id, searchResult);
@@ -40,6 +39,10 @@ Meteor.publish('search', function (latitude, longitude) {
 
   self.ready();
 
+});
+
+Meteor.publish('favorites', function () {
+  return Favorite.find({});
 });
 
 Meteor.publish('business', function (id) {

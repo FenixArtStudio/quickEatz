@@ -3,3 +3,4 @@
 yelpKeys.js
 business.json
 sample.json
+server/smtp.js

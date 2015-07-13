@@ -1,0 +1,28 @@
+<template name="favorites">
+  {{#contentFor "headerButtonLeft"}}
+    {{>ionNavBackButton path="restaurants"}}
+  {{/contentFor}}
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Quik Eatz</h1>
+  {{/contentFor}}
+  {{#ionView}}
+    {{#ionContent}}
+      <div class="padding">
+        {{#if favorites.count}}
+          <h2>My Favorites</h2>
+        {{else}}
+          <h2>You don't have any favorites</h2>
+        {{/if}}
+        <div class="results-list">
+          {{#each favorites}}
+            <a class="item" href="{{pathFor 'businessPage' _id=businessId}}">
+              <img src="{{image_url}}">
+              <h2>{{businessName}}</h2>
+            </a>
+          {{/each}}
+        </div>
+      </div>
+    {{/ionContent}}
+  {{/ionView}}
+  {{> footer}}
+</template>

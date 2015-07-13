@@ -1,0 +1,16 @@
+<template name="settings">
+  {{#contentFor "headerButtonLeft"}}
+    {{>ionNavBackButton path="index"}}
+  {{/contentFor}}
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Sign Up</h1>
+  {{/contentFor}}
+  {{#ionView}}
+    {{#ionContent}}
+      <div class="padding">
+        <button class="button button-full button-positive" data-action="logout">Logout</button>
+      </div>
+    {{/ionContent}}
+  {{/ionView}}
+  {{> footer}}
+</template>
