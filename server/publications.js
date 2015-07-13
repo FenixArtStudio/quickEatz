@@ -1,11 +1,12 @@
 Meteor.startup(function () {
+  process.env.MAIL_URL = 'smtp://' + encodeURIComponent(Meteor.settings.private.smtp.username) + ':' + encodeURIComponent(Meteor.settings.private.smtp.password) + '@' + encodeURIComponent(Meteor.settings.private.smtp.server) + ':' + Meteor.settings.private.port;
   if(!Accounts.loginServiceConfiguration.findOne({service: 'yelp'})) {
     Accounts.loginServiceConfiguration.insert({
       service: "yelp",
-      consumerKey: YELP.CONSUMERKEY,
-      consumerSecret: YELP.CONSUMERSECRET,
-      accessToken: YELP.ACCESSTOKEN,
-      accessTokenSecret: YELP.ACCESSTOKENSECRET,
+      consumerKey: Meteor.settings.private.yelp.consumerkey,
+      consumerSecret: Meteor.settings.private.yelp.consumersecret,
+      accessToken: Meteor.settings.private.yelp.accesstoken,
+      accessTokenSecret: Meteor.settings.private.yelp.accesstokensecret,
       signatureMethod: "HMAC-SHA1"
     });
   }
