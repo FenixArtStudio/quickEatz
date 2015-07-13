@@ -51,7 +51,7 @@ Template.businessesList.events({
       });
     }
   },
-  'keyup #filter': function (event, tpl) {
+  'keyup form #filter': function (event, tpl) {
     event.preventDefault();
     var filter = tpl.$('[name=search]').val(), count = 0;
     var resultsCount = document.getElementById('results-count');
@@ -62,9 +62,10 @@ Template.businessesList.events({
       } else {
         $(this).show();
         count++
-        $('#results-count').text('Results ' + count);
       }
+      $('#results-count').text('Results ' + count);
     });
+    return false;
   },
   'click [data-action=logout]': function (event) {
     event.preventDefault();

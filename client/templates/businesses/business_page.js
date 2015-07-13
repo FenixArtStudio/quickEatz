@@ -9,7 +9,11 @@ Template.businessPage.events({
   'click [data-action=favorite]': function (event, template) {
     Meteor.call('addFavorite', this, function (error, result) {
       if (error) {
-        console.log(error);
+        IonPopup.alert({
+          title: 'Errpr',
+          template: error.reason,
+          okText: 'Ok.'
+        });
       }
       if (result.favoriteExists) {
         $('.favorite-button').removeClass('favorite-active');  
