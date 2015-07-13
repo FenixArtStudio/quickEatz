@@ -2,5 +2,5 @@
 .DS_Store
 yelpKeys.js
 business.json
-sample.json
+search.json
 server/smtp.js
