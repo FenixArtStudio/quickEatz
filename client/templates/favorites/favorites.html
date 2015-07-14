@@ -8,13 +8,13 @@
   {{#ionView}}
     {{#ionContent}}
       <div class="padding">
-        {{#if favorites.count}}
+        {{#if this.favorites.count}}
           <h2>My Favorites</h2>
         {{else}}
           <h2>You don't have any favorites</h2>
         {{/if}}
         <div class="results-list">
-          {{#each favorites}}
+          {{#each this.favorites}}
             <a class="item" href="{{pathFor 'businessPage' _id=businessId}}">
               <img src="{{image_url}}">
               <h2>{{businessName}}</h2>

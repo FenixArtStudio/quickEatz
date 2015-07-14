@@ -1,10 +1,10 @@
 Template.signup.events({
   'submit': function (event, template) {
     event.preventDefault();
+
     var username = template.$('[name=username]').val();
     var email = template.$('[name=email]').val();
     var password = template.$('[name=password]').val();
-    
     var user = {
       username: username,
       email: email,
@@ -19,8 +19,9 @@ Template.signup.events({
           okText: 'Ok.'
         });
       }  else {
-        Router.go('/restaurants')
+        Router.go('restaurants')
       }
     });
+
   }
-})
+});

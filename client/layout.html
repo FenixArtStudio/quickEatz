@@ -1,5 +1,8 @@
 <template name="layout">
   {{#ionBody}}
+    {{#contentFor "headerTitle"}}
+      <h1 class="title">Quik Eatz</h1>
+    {{/contentFor}}
     {{> ionNavBar class="bar-positive"}}
     {{#ionNavView}}
       {{> yield}} 
