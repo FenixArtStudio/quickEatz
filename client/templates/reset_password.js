@@ -24,10 +24,37 @@ Template.forgotPassword.events({
 
 if (Accounts._resetPasswordToken) {
   Session.set('resetPassword', Accounts._resetPasswordToken)
+  Router.go('/reset-password')
 }
 
 Template.resetPassword.helpers({
   resetPassword: function () {
     return Session.get('resetPassword');
+  }
+});
+
+Template.resetPassword.events({
+  'submit': function (event, template) {
+    event.preventDefault();
+    var password = template.$('[name=password]').val();
+    var passwordConfirmation = template.$('[name=password-confirmation]').val();
+    if (password === passwordConfirmation) {
+      Accounts.resetPassword(Session.get('resetPassword'), password, function (error) {
+        if (error) {
+          IonPopup.alert({
+            title: 'There was an error reseting your password:',
+            template: error.reason,
+            okText: 'Ok.'
+          });
+        } else {
+          Session.set('resetPassword', null);
+          IonPopup.alert({
+            title: 'Success',
+            template: 'You successfully reset your password',
+            okText: 'Ok.'
+          });
+        }
+      }); 
+    }
   }
 });
