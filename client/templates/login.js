@@ -7,11 +7,7 @@ Template.login.events({
 
     Meteor.loginWithPassword(email, password, function (error) {
       if (error) {
-        IonPopup.alert({
-          title: 'There was an error loging in:',
-          template: error.reason,
-          okText: 'Ok.'
-        });
+        return throwError(error);
       } else {
         Router.go('/restaurants');
       }

@@ -2,22 +2,15 @@ Template.signup.events({
   'submit': function (event, template) {
     event.preventDefault();
 
-    var username = template.$('[name=username]').val();
-    var email = template.$('[name=email]').val();
-    var password = template.$('[name=password]').val();
     var user = {
-      username: username,
-      email: email,
-      password: password
+      username: template.$('[name=username]').val(),
+      email: template.$('[name=email]').val(),
+      password: template.$('[name=password]').val()
     };
     
     Accounts.createUser(user, function (error) {
       if (error) {
-        IonPopup.alert({
-          title: 'There was an error creating your account:',
-          template: error.reason,
-          okText: 'Ok.'
-        });
+        return throwError(error);
       }  else {
         Router.go('restaurants')
       }

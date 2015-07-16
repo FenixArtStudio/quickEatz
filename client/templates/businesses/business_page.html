@@ -1,16 +1,21 @@
 <template name="businessPage">
+  
   {{#contentFor "headerButtonLeft"}}
     {{>ionNavBackButton path="restaurants"}}
   {{/contentFor}}
   {{#contentFor "headerTitle"}}
     <h1 class="title">Quik Eatz</h1>
   {{/contentFor}}
+
   {{#ionView}}
     {{#ionContent}}
+      {{#if Template.subscriptionsReady}}
+      {{#with business}}
       <div style="height: 100%">
         <div class="list card">
           <div class="item">
             <h2>{{name}}</h2>
+            <div id="open-now"></div>
             <p>{{location.neighborhoods}}</p>
             <a href="#" data-action="directions">{{location.display_address}}</a>
           </div>
@@ -38,7 +43,10 @@
           </div>
         </div>
       </div>
+      {{/with}}
+      {{/if}}
     {{/ionContent}} 
   {{/ionView}}
+  
   {{> footer}}
 </template>

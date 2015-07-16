@@ -1,19 +1,22 @@
-Template.businessPage.onRendered(function () {
-  var favoriteExists = Favorite.findOne({userId: Meteor.user()._id, businessId: this.data._id});
-  if (favoriteExists) {
-    $('.favorite-button').addClass('favorite-active');
+Template.businessPage.onCreated(function () {
+  var self = this;
+  Meteor.setTimeout(function () {
+    self.subscribe('business', Router.current().params._id);
+    self.subscribe('favorites', Meteor.userId());  
+  }, 250);
+});
+
+Template.businessPage.helpers({
+  business: function () {
+    return Business.findOne({_id: Router.current().params._id});
   }
 });
 
 Template.businessPage.events({
   'click [data-action=favorite]': function (event, template) {
-    Meteor.call('addFavorite', this, function (error, result) {
+    Meteor.call('toggleFavorite', this, function (error, result) {
       if (error) {
-        IonPopup.alert({
-          title: 'Errpr',
-          template: error.reason,
-          okText: 'Ok.'
-        });
+        return throwError(error);
       }
       if (result.favoriteExists) {
         $('.favorite-button').removeClass('favorite-active');  

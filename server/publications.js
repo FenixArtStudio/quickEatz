@@ -13,6 +13,9 @@ Meteor.startup(function () {
 });
 
 Meteor.publish('search', function (latitude, longitude) {
+  check(latitude, Number);
+  check(longitude, Number);
+  
   var self = this;
   
   var auth = Accounts.loginServiceConfiguration.findOne({service: 'yelp'});
@@ -42,11 +45,12 @@ Meteor.publish('search', function (latitude, longitude) {
 
 });
 
-Meteor.publish('favorites', function () {
-  return Favorite.find({});
+Meteor.publish('favorites', function (userId) {
+  return Favorite.find({userId: userId});
 });
 
 Meteor.publish('business', function (id) {
+  check(id, String);
   var self = this;
   
   var auth = Accounts.loginServiceConfiguration.findOne({service: 'yelp'});
@@ -64,8 +68,9 @@ Meteor.publish('business', function (id) {
   oauthBinding.accessTokenSecret = auth.accessTokenSecret;
 
   var businessResult = oauthBinding.call('GET', oauthBinding._urls, parameters);
+
   businessResult.data.original_image_url = businessResult.data.image_url.replace('ms.jpg', 'o.jpg');
-  
+    
   self.added('business', businessResult.data.id, businessResult.data);
   self.ready();
 });

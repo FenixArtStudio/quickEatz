@@ -5,11 +5,7 @@ Template.forgotPassword.events({
     if (email) {
       Accounts.forgotPassword({email:email}, function (error) {
         if (error) {
-          IonPopup.alert({
-            title: 'There was an error reseting your password:',
-            template: error.reason,
-            okText: 'Ok.'
-          });
+          return throwError(error);
         } else {
           IonPopup.alert({
             title: 'Success',
@@ -41,11 +37,7 @@ Template.resetPassword.events({
     if (password === passwordConfirmation) {
       Accounts.resetPassword(Session.get('resetPassword'), password, function (error) {
         if (error) {
-          IonPopup.alert({
-            title: 'There was an error reseting your password:',
-            template: error.reason,
-            okText: 'Ok.'
-          });
+          return throwError(error);
         } else {
           Session.set('resetPassword', null);
           IonPopup.alert({

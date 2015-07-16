@@ -2,13 +2,6 @@ Template.businessesList.onCreated(function () {
   this.loading = new ReactiveVar;
 });
 
-Template.businessPage.onRendered(function () {
-  var favoriteExists = Favorite.findOne({userId: Meteor.user()._id, businessId: this.data._id});
-  if (favoriteExists) {
-    $('.favorite-button').addClass('favorite-active');  
-  }
-});
-
 Template.businessesList.helpers({
   results: function () {
     return Search.find();
@@ -54,7 +47,6 @@ Template.businessesList.events({
   'keyup form #filter': function (event, tpl) {
     event.preventDefault();
     var filter = tpl.$('[name=search]').val(), count = 0;
-    var resultsCount = document.getElementById('results-count');
     var regex = new RegExp(filter, 'i');
     $('.results-list').each(function () {
       if ($(this).text().search(regex) < 0) {

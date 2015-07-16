@@ -8,21 +8,27 @@
   {{#ionView}}
     {{#ionContent}}
       <div class="padding">
-        {{#if this.favorites.count}}
+        {{#if favorites.count}}
           <h2>My Favorites</h2>
-        {{else}}
-          <h2>You don't have any favorites</h2>
         {{/if}}
         <div class="results-list">
-          {{#each this.favorites}}
-            <a class="item" href="{{pathFor 'businessPage' _id=businessId}}">
-              <img src="{{image_url}}">
-              <h2>{{businessName}}</h2>
-            </a>
+          {{#each favorites}}
+            {{>favorite}}
           {{/each}}
         </div>
       </div>
     {{/ionContent}}
   {{/ionView}}
   {{> footer}}
+</template>
+
+<template name="favorite">
+  <div class="item item-icon-right">
+    <a href="{{pathFor 'businessPage' _id=businessId}}">
+    <h2>{{businessName}}</h2>
+    </a>
+    <a href="#" data-action="favorite">
+      <i class="icon ion-android-favorite favorite-active"></i>
+    </a>
+  </div>
 </template>
