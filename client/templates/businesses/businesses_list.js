@@ -1,5 +1,5 @@
 Template.businessesList.onCreated(function () {
-  this.loading = new ReactiveVar;
+  this.loading = new ReactiveVar();
 });
 
 Template.businessesList.helpers({
@@ -16,7 +16,7 @@ Template.businessesList.rendered = function () {
     } else {
       IonLoading.hide();
     }
-  })
+  });
 };
 
 Template.businessesList.events({
@@ -35,10 +35,9 @@ Template.businessesList.events({
         });
       }
     }
-    function showPosition(position) {        
-      var long, lat; 
-      lat = position.coords.latitude;
-      long = position.coords.longitude; 
+    function showPosition(position) {
+      var lat = position.coords.latitude;
+      var long = position.coords.longitude;
       Meteor.subscribe('search', lat, long, function () {
         template.loading.set(false);
       });
@@ -53,7 +52,7 @@ Template.businessesList.events({
         $(this).hide();
       } else {
         $(this).show();
-        count++
+        count++;
       }
       $('#results-count').text('Results ' + count);
     });
@@ -62,7 +61,7 @@ Template.businessesList.events({
   'click [data-action=logout]': function (event) {
     event.preventDefault();
     Meteor.logout(function () {
-      Router.go('index')
+      Router.go('index');
     });
   }
 });

@@ -1,7 +1,7 @@
 Template.favorites.onCreated(function () {
   var self = this;
   Meteor.setTimeout(function () {
-    self.subscribe('favorites', Meteor.userId());  
+    self.subscribe('favorites');  
   }, 250);
 });
 
@@ -16,6 +16,8 @@ Template.favorites.events({
     Meteor.call('removeFavorite', this._id, function (error, result) {
       if (error) {
         return throwError(error);
+      } else {
+        return throwSuccess('Favorite Removed');
       }
     });
   }

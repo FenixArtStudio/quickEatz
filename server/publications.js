@@ -45,8 +45,8 @@ Meteor.publish('search', function (latitude, longitude) {
 
 });
 
-Meteor.publish('favorites', function (userId) {
-  return Favorite.find({userId: userId});
+Meteor.publish('favorites', function () {
+  return Favorite.find({userId: this.userId});
 });
 
 Meteor.publish('business', function (id) {
@@ -73,4 +73,12 @@ Meteor.publish('business', function (id) {
     
   self.added('business', businessResult.data.id, businessResult.data);
   self.ready();
+});
+
+Meteor.publish('userData', function () {
+  if (this.userId) {
+    return Meteor.users.find({_id: this.userId})
+  } else {
+    this.ready();
+  }
 });

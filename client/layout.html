@@ -5,10 +5,27 @@
     {{/contentFor}}
     {{> ionNavBar class="bar-positive"}}
     {{#ionNavView}}
+      {{> notifications}}      
       {{> yield}} 
       {{#if currentUser}}
         {{> footer}}
       {{/if}}
     {{/ionNavView}}
   {{/ionBody}}
+</template>
+
+<template name="notifications">
+  <div class="notifications">
+    {{#each notifications}}
+      {{> notification}}
+    {{/each}}
+  </div>
+</template>
+<template name="notification">
+  <div class="alert" role="alert">
+    <a href="#" type="button" class="button button-clear icon-right" data-action="dismiss-alert">
+      {{message}}
+      <i class="icon ion-android-cancel"></i>  
+    </a>
+  </div>
 </template>
