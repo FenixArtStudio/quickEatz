@@ -1,10 +1,17 @@
 Template.businessesList.onCreated(function () {
   this.loading = new ReactiveVar();
+  this.subscribe('favorites');
 });
 
 Template.businessesList.helpers({
   results: function () {
-    return Search.find();
+    return Search.find({}, {sort: {distance_in_miles: 1}});
+  }
+});
+
+Template.business.helpers({
+  favorite: function () {
+    return Favorite.findOne({businessId: this._id});
   }
 });
 

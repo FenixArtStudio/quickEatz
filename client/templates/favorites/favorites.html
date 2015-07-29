@@ -7,16 +7,16 @@
   {{/contentFor}}
   {{#ionView}}
     {{#ionContent}}
-      <div class="padding">
-        {{#if favorites.count}}
+      {{#if favorites.count}}
+        <div class="padding">
           <h2>My Favorites</h2>
-        {{/if}}
-        <div class="results-list">
-          {{#each favorites}}
-            {{>favorite}}
-          {{/each}}
+          <div class="results-list">
+            {{#each favorites}}
+              {{>favorite}}
+            {{/each}}
+          </div>
         </div>
-      </div>
+      {{/if}}
     {{/ionContent}}
   {{/ionView}}
   {{> footer}}

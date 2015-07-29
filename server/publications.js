@@ -15,9 +15,9 @@ Meteor.startup(function () {
 Meteor.publish('search', function (latitude, longitude) {
   check(latitude, Number);
   check(longitude, Number);
-  
+
   var self = this;
-  
+
   var auth = Accounts.loginServiceConfiguration.findOne({service: 'yelp'});
 
   var config = {
@@ -34,7 +34,7 @@ Meteor.publish('search', function (latitude, longitude) {
 
   var oauthBinding = new OAuth1Binding(config, 'http://api.yelp.com/v2/search');
   oauthBinding.accessTokenSecret = auth.accessTokenSecret;
-  
+
   var searchResults = oauthBinding.call('GET', oauthBinding._urls, parameters);
   _.each(searchResults.data.businesses, function (searchResult) {
     searchResult.distance_in_miles = (searchResult.distance * 0.000621371).toFixed(2);
@@ -52,7 +52,7 @@ Meteor.publish('favorites', function () {
 Meteor.publish('business', function (id) {
   check(id, String);
   var self = this;
-  
+
   var auth = Accounts.loginServiceConfiguration.findOne({service: 'yelp'});
 
   var config = {
@@ -70,14 +70,14 @@ Meteor.publish('business', function (id) {
   var businessResult = oauthBinding.call('GET', oauthBinding._urls, parameters);
 
   businessResult.data.original_image_url = businessResult.data.image_url.replace('ms.jpg', 'o.jpg');
-    
+
   self.added('business', businessResult.data.id, businessResult.data);
   self.ready();
 });
 
 Meteor.publish('userData', function () {
   if (this.userId) {
-    return Meteor.users.find({_id: this.userId})
+    return Meteor.users.find({_id: this.userId});
   } else {
     this.ready();
   }

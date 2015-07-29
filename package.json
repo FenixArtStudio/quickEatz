@@ -1,0 +1,5 @@
+{
+  "scripts":{
+    "start": "meteor --settings private/.config/settings.json"
+  }
+}

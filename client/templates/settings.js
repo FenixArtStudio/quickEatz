@@ -9,27 +9,38 @@ Template.settings.events({
   'click [data-action=logout]': function (event) {
     event.preventDefault();
     Meteor.logout(function () {
-      Router.go('index')
+      Router.go('index');
       return throwSuccess('You\'ve logged out!');
     });
   },
-  'blur input[type=text]': function (event, template) {
+  'submit': function (event, template) {
     event.preventDefault();
-    event.target.blur();
     var username = template.$('[name=username]').val();
-    if (username != '') {
-      Meteor.call('updateUser', username, function (error, result) {
+    Meteor.call('updateUser', username, function (error, result) {
+      if (error) {
+        return throwError(error);
+      }
+      if (result.userUpdated) {
+        return throwSuccess('Username Updated');
+      }
+    });
+  },
+  'change input:file': function (event, template) {
+    event.preventDefault();
+    var avatar = template.$('[name=avatar]')[0].files[0];
+
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      Meteor.call('uploadUserAvatar', e.target.result, function (error, result) {
         if (error) {
           return throwError(error);
-        } 
+        }
         if (result.userUpdated) {
           return throwSuccess('Username Updated');
         }
       });
-    } else {
-      // $('input').val((Meteor.user().username));
-      return throwError('Username Updated');
-    }
+    };
+    reader.readAsDataURL(avatar);
+
   }
 });
-

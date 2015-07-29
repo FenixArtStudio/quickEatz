@@ -9,16 +9,27 @@
     {{#ionContent}}
       <form onsubmit="return false;">
         <div class="list">
+          <div class="item item-avatar">
+            <img src="{{currentUser.avatar}}">
+            <h2>{{currentUser.username}}</h2>
+            <p>{{currentUser.emails.[0].address}}</p>
+          </div>
           <label class="item item-input">
             <span class="input-label">Username</span>
             <input class="username-input" name="username" type="text" value="{{currentUser.username}}">
           </label>
+          <label class="item item-input">
+            <span class="input-label">Upload Avatar</span>
+            <input class="image-input" name="avatar" type="file">
+          </label>
+          <div class="padding">
+            <button type="submit" class="button button-full button-positive" data-action="submit">Submit</button>
+          </div>
         </div>
       </form>
       <div class="padding">
         <button class="button button-full button-positive" data-action="logout">Logout</button>
       </div>
-      <p></p>
     {{/ionContent}}
   {{/ionView}}
   {{> footer}}

@@ -1,9 +1,14 @@
 <template name="business">
-  <a class="item item-thumbnail-left" href="{{pathFor 'businessPage'}}">
+  <a class="item item-thumbnail-left item-icon-right {{favorite}}" href="{{pathFor 'businessPage'}}">
     <img src="{{image_url}}">
     <h2>{{name}}</h2>
     <p>{{location.neighborhoods}}</p>
     <p>{{distance_in_miles}} Miles Away</p>
     <p>{{rating}} Star Rating | {{review_count}} Reviews</p>
+    {{#if favorite}}
+      <div href="#" data-action="favorite">
+        <i class="icon ion-android-favorite favorite-active"></i>
+      </div>
+    {{/if}}
   </a>
 </template>

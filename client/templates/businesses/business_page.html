@@ -1,5 +1,5 @@
 <template name="businessPage">
-  
+
   {{#contentFor "headerButtonLeft"}}
     {{>ionNavBackButton path="restaurants"}}
   {{/contentFor}}
@@ -9,9 +9,9 @@
 
   {{#ionView}}
     {{#ionContent}}
-      {{#if Template.subscriptionsReady}}
-      {{#with business}}
+
       <div style="height: 100%">
+        {{#with business}}
         <div class="list card">
           <div class="item">
             <h2>{{name}}</h2>
@@ -32,7 +32,7 @@
               <i class="icon ion-ios-telephone"></i>
               Call
             </a>
-            <a class="tab-item favorite-button" href="#" data-action="favorite">
+            <a class="tab-item {{favorite}}" href="#" data-action="favorite">
               <i class="icon ion-android-favorite"></i>
               Favorite
             </a>
@@ -42,11 +42,14 @@
             </a>
           </div>
         </div>
+        {{/with}}
+        <div id="map-canvas"></div>
       </div>
-      {{/with}}
-      {{/if}}
-    {{/ionContent}} 
+
+
+
+    {{/ionContent}}
   {{/ionView}}
-  
+
   {{> footer}}
 </template>

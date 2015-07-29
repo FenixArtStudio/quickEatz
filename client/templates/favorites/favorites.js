@@ -1,8 +1,6 @@
 Template.favorites.onCreated(function () {
   var self = this;
-  Meteor.setTimeout(function () {
-    self.subscribe('favorites');  
-  }, 250);
+    self.subscribe('favorites');
 });
 
 Template.favorites.helpers({
